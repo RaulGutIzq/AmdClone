@@ -1,483 +1,1590 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <title>amd-shop-eu-en-prd</title>
+        <link rel="dns-prefetch preconnect" href="https://cdn11.bigcommerce.com/s-3wzspkde5p" crossorigin><link rel="dns-prefetch preconnect" href="https://fonts.googleapis.com/" crossorigin><link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <link rel='canonical' href='https://shop-eu-en.amd.com/' /><meta name='platform' content='bigcommerce.stencil' />
+        
+         
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://download.amd.com/js/analytics/analyticsinit.js"></script>
+        <script>window.theme = window.theme || {};</script>
+         <!--<script type="text/javascript" src="https://download.amd.com/js/analytics/shop-ot-init.js"></script>-->
+        <link href="https://cdn11.bigcommerce.com/s-3wzspkde5p/product_images/favicon.png?t&#x3D;1664914157" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+        <style type="text/css">
+            @font-face {
+              font-family: Klavika;      
+              src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/fonts/KlavikaWebRegularCondensed.ttf");
+            }  
+            @font-face {
+              font-family: klavika-medium;      
+              src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/fonts/klavika-medium.otf");
+            }  
+            @font-face {
+              font-family: NotoSans-Medium;      
+              src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/fonts/NotoSans-Medium.ttf");
+            }  
+            @font-face {
+              font-family: NotoSans-Regular;      
+              src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/fonts/NotoSans-Regular.ttf");
+            }  
+            @font-face {
+              font-family: NotoSans-bold;      
+              src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/fonts/NotoSans-Bold.ttf");
+            }     
+        </style>
+        <style type="text/css" media="screen, print">
+            @font-face {
+                font-family: "klavika-medium";
+                /*src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/content/Klavika-Web-Medium-Condensed.ttf");*/
+                src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/fonts/klavika-medium.otf");
+            }
+            
+             @font-face {
+                font-family: "LSCCondensed";
+                src: url("https://cdn11.bigcommerce.com/s-3wzspkde5p/content/LSCCondensed.ttf");
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
+        <script>
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+        <script>
+    function browserSupportsAllFeatures() {
+        return window.Promise
+            && window.fetch
+            && window.URL
+            && window.URLSearchParams
+            && window.WeakMap
+            // object-fit support
+            && ('objectFit' in document.documentElement.style);
     }
 
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
+    function loadScript(src) {
+        var js = document.createElement('script');
+        js.src = src;
+        js.onerror = function () {
+            console.error('Failed to load polyfill script ' + src);
+        };
+        document.head.appendChild(js);
     }
 
-    .card.highlight-card span {
-      margin-left: 72px;
+    if (!browserSupportsAllFeatures()) {
+        loadScript('https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/dist/theme-bundle.polyfills.js');
+    }
+</script>
+        <script>window.consentManagerTranslations = `{"locale":"en","locales":{"consent_manager.data_collection_warning":"en","consent_manager.accept_all_cookies":"en","consent_manager.gdpr_settings":"en","consent_manager.data_collection_preferences":"en","consent_manager.manage_data_collection_preferences":"en","consent_manager.use_data_by_cookies":"en","consent_manager.data_categories_table":"en","consent_manager.allow":"en","consent_manager.accept":"en","consent_manager.deny":"en","consent_manager.dismiss":"en","consent_manager.reject_all":"en","consent_manager.category":"en","consent_manager.purpose":"en","consent_manager.functional_category":"en","consent_manager.functional_purpose":"en","consent_manager.analytics_category":"en","consent_manager.analytics_purpose":"en","consent_manager.targeting_category":"en","consent_manager.advertising_category":"en","consent_manager.advertising_purpose":"en","consent_manager.essential_category":"en","consent_manager.esential_purpose":"en","consent_manager.yes":"en","consent_manager.no":"en","consent_manager.not_available":"en","consent_manager.cancel":"en","consent_manager.save":"en","consent_manager.back_to_preferences":"en","consent_manager.close_without_changes":"en","consent_manager.unsaved_changes":"en","consent_manager.by_using":"en","consent_manager.agree_on_data_collection":"en","consent_manager.change_preferences":"en","consent_manager.cancel_dialog_title":"en","consent_manager.privacy_policy":"en","consent_manager.allow_category_tracking":"en","consent_manager.disallow_category_tracking":"en"},"translations":{"consent_manager.data_collection_warning":"We use cookies (and other similar technologies) to collect data to improve your shopping experience.","consent_manager.accept_all_cookies":"Accept All Cookies","consent_manager.gdpr_settings":"Settings","consent_manager.data_collection_preferences":"Website Data Collection Preferences","consent_manager.manage_data_collection_preferences":"Manage Website Data Collection Preferences","consent_manager.use_data_by_cookies":" uses data collected by cookies and JavaScript libraries to improve your shopping experience.","consent_manager.data_categories_table":"The table below outlines how we use this data by category. To opt out of a category of data collection, select 'No' and save your preferences.","consent_manager.allow":"Allow","consent_manager.accept":"Accept","consent_manager.deny":"Deny","consent_manager.dismiss":"Dismiss","consent_manager.reject_all":"Reject all","consent_manager.category":"Category","consent_manager.purpose":"Purpose","consent_manager.functional_category":"Functional","consent_manager.functional_purpose":"Enables enhanced functionality, such as videos and live chat. If you do not allow these, then some or all of these functions may not work properly.","consent_manager.analytics_category":"Analytics","consent_manager.analytics_purpose":"Provide statistical information on site usage, e.g., web analytics so we can improve this website over time.","consent_manager.targeting_category":"Targeting","consent_manager.advertising_category":"Advertising","consent_manager.advertising_purpose":"Used to create profiles or personalize content to enhance your shopping experience.","consent_manager.essential_category":"Essential","consent_manager.esential_purpose":"Essential for the site and any requested services to work, but do not perform any additional or secondary function.","consent_manager.yes":"Yes","consent_manager.no":"No","consent_manager.not_available":"N/A","consent_manager.cancel":"Cancel","consent_manager.save":"Save","consent_manager.back_to_preferences":"Back to Preferences","consent_manager.close_without_changes":"You have unsaved changes to your data collection preferences. Are you sure you want to close without saving?","consent_manager.unsaved_changes":"You have unsaved changes","consent_manager.by_using":"By using our website, you're agreeing to our","consent_manager.agree_on_data_collection":"By using our website, you're agreeing to the collection of data as described in our ","consent_manager.change_preferences":"You can change your preferences at any time","consent_manager.cancel_dialog_title":"Are you sure you want to cancel?","consent_manager.privacy_policy":"Privacy Policy","consent_manager.allow_category_tracking":"Allow [CATEGORY_NAME] tracking","consent_manager.disallow_category_tracking":"Disallow [CATEGORY_NAME] tracking"}}`;</script>
+        <script>
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async src="https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/dist/theme-bundle.head_async.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+        <script>
+            WebFont.load({
+                custom: {
+                    families: ['Karla', 'Roboto', 'Source Sans Pro']
+                },
+                classes: false
+            });
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Karla:400%7CMontserrat:400&display=swap" rel="stylesheet">
+        <link data-stencil-stylesheet href="https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/css/theme-eefaafb0-bbdf-013d-f7ba-3ec0b5738a05.css" rel="stylesheet">
+        
+<script type="text/javascript" src="https://checkout-sdk.bigcommerce.com/v1/loader.js" defer></script>
+<script type="text/javascript">
+var BCData = {};
+</script>
+
+    </head>
+    <body data-currency="EUR" class="">
+        <svg data-src="https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/img/icon-sprite.svg" class="icons-svg-sprite"></svg>
+
+        
+
+
+<app-header></app-header>
+        <main class="body default-page " id="main-content" role="main" data-currency-code="EUR">
+        <div data-content-region="home_below_menu"></div>
+        <section class="heroCarousel"
+    data-slick='{
+        "arrows": true,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "autoplay": true,
+        "autoplaySpeed": 10000,
+        "slide": "[data-hero-slide]"
+    }'
+>
+    <div data-hero-slide="0">
+        <div class="heroCarousel-slide  heroCarousel-slide--first With-text">
+            <a href="https://shop-eu-en.amd.com/processors/" class="heroCarousel-image-wrapper">
+                <img src="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/1280w/carousel/35/2940601-ryzen-7-9000-series-9800X3D-banner.jpg?c=1" alt="" title="" data-sizes="auto"
+srcset="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/80w/carousel/35/2940601-ryzen-7-9000-series-9800X3D-banner.jpg?c=1 80w, https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/160w/carousel/35/2940601-ryzen-7-9000-series-9800X3D-banner.jpg?c=1 160w, https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/320w/carousel/35/2940601-ryzen-7-9000-series-9800X3D-banner.jpg?c=1 320w, https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/640w/carousel/35/2940601-ryzen-7-9000-series-9800X3D-banner.jpg?c=1 640w, https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/888w/carousel/35/2940601-ryzen-7-9000-series-9800X3D-banner.jpg?c=1 888w"
+
+class=" heroCarousel-image"
+
+ />
+            </a>
+                <div class="heroCarousel-content static">
+    <div class="heroCarouselContentBox">
+        <p class="heroCarousel-title">AMD Ryzen&trade; 7 9800X3D</p>
+            <p class="heroCarousel-description">The fastest gaming processor the world has ever seen, is now available.</p>
+            <a href="https://shop-eu-en.amd.com/processors/" aria-label="Slide number 1, Get Yours" class="heroCarousel-action button button--primary button--large">Get Yours</a>
+        </div>
+</div>
+        </div>
+    </div>
+</section>
+    <div data-content-region="home_below_carousel"></div>
+
+    <div class="container">
+        
+
+<div class="main full">
+        <div data-content-region="home_below_featured_products"><div data-layout-id="daf0cdfd-f6b2-4ad4-aac9-279047e76ce8"><div data-sub-layout-container="efc471c7-116b-40f5-8fec-fb501ac06f25" data-layout-name="Layout">
+  <style data-container-styling="efc471c7-116b-40f5-8fec-fb501ac06f25">
+    [data-sub-layout-container="efc471c7-116b-40f5-8fec-fb501ac06f25"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="efc471c7-116b-40f5-8fec-fb501ac06f25"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="c46c5812-bb1b-4bd9-a4ab-7ca10b983e5a">
+    <style data-column-styling="c46c5812-bb1b-4bd9-a4ab-7ca10b983e5a">
+      [data-sub-layout="c46c5812-bb1b-4bd9-a4ab-7ca10b983e5a"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 100%;
+        max-width: 100%;
+        z-index: 0;
+        justify-content: center;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="c46c5812-bb1b-4bd9-a4ab-7ca10b983e5a"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="c46c5812-bb1b-4bd9-a4ab-7ca10b983e5a"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="67643c3f-3da2-40f1-8218-8880100e045d" data-placement-id="cbd93af7-56bb-4126-8e4d-029b67b7a50b" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-67643c3f-3da2-40f1-8218-8880100e045d {
+      padding-top: 20px;
+      padding-right: 0px;
+      padding-bottom: 20px;
+      padding-left: 0px;
+
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
+
     }
 
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
+    .sd-simple-text-67643c3f-3da2-40f1-8218-8880100e045d * {
+      margin: 0;
+      padding: 0;
 
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 38px;
+        min-height: 38px;
+
     }
+
+    .sd-simple-text-67643c3f-3da2-40f1-8218-8880100e045d {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d strong,
+    #sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-67643c3f-3da2-40f1-8218-8880100e045d ">
+  <div id="sd-simple-text-editable-67643c3f-3da2-40f1-8218-8880100e045d" data-edit-mode="">
+    <p><strong>Gaming &amp; Personal Computing</strong></p>
+  </div>
+</div>
+
+</div><div data-widget-id="18f2ea3d-5bc7-49be-8d42-8ae16c3219e7" data-placement-id="097607bf-c6b5-49b2-86ca-fc39420f125a" data-placement-status="ACTIVE"><style>
+  .sd-spacer-18f2ea3d-5bc7-49be-8d42-8ae16c3219e7 {
+    height: 20px;
   }
 </style>
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-    <a aria-label="Angular on X" target="_blank" rel="noopener" href="https://twitter.com/angular" title="X">
-      <svg id="twitter-logo" xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-name="Logo" viewBox="0 0 512 512" fill="#fff">
-        <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
-      </svg>
-    </a>
-    <a aria-label="Angular on YouTube" target="_blank" rel="noopener" href="https://youtube.com/angular" title="YouTube">
-      <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
-      </svg>
+<div class="sd-spacer-18f2ea3d-5bc7-49be-8d42-8ae16c3219e7">
+</div>
+</div>
+  </div>
+</div>
+<div data-sub-layout-container="4eac3e24-0d64-41f6-a44c-defaf1b42186" data-layout-name="Layout">
+  <style data-container-styling="4eac3e24-0d64-41f6-a44c-defaf1b42186">
+    [data-sub-layout-container="4eac3e24-0d64-41f6-a44c-defaf1b42186"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="4eac3e24-0d64-41f6-a44c-defaf1b42186"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="6d5500c1-adbb-4ca9-8739-81fb29741cf5">
+    <style data-column-styling="6d5500c1-adbb-4ca9-8739-81fb29741cf5">
+      [data-sub-layout="6d5500c1-adbb-4ca9-8739-81fb29741cf5"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 16.666666666666664%;
+        max-width: 16.666666666666664%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="6d5500c1-adbb-4ca9-8739-81fb29741cf5"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="6d5500c1-adbb-4ca9-8739-81fb29741cf5"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </div>
+  <div data-sub-layout="cd3187f5-16eb-4ced-b102-f52aa3076f8b">
+    <style data-column-styling="cd3187f5-16eb-4ced-b102-f52aa3076f8b">
+      [data-sub-layout="cd3187f5-16eb-4ced-b102-f52aa3076f8b"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 33.33333333333333%;
+        max-width: 33.33333333333333%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="cd3187f5-16eb-4ced-b102-f52aa3076f8b"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="cd3187f5-16eb-4ced-b102-f52aa3076f8b"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="ee7f2fb4-4388-49db-9577-5cdfff04a44c" data-placement-id="e0153409-c6df-4d0a-acbb-409872ae4ce3" data-placement-status="ACTIVE"><style>
+    #sd-image-ee7f2fb4-4388-49db-9577-5cdfff04a44c {
+        display: flex;
+        align-items: center;
+        background: url('https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/amd-ryzen-ai.jpg?t=1728933847') no-repeat;
+        opacity: calc(100 / 100);
+
+            cursor: pointer;
+
+            background-size: contain;
+
+            height: auto;
+
+        background-position:
+                center
+                center
+;
+
+
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+
+    #sd-image-ee7f2fb4-4388-49db-9577-5cdfff04a44c * {
+        margin: 0px;
+    }
+
+    #sd-image-ee7f2fb4-4388-49db-9577-5cdfff04a44c img {
+        width: auto;
+        opacity: 0;
+
+            height: auto;
+    }
+
+    @media only screen and (max-width: 700px) {
+        #sd-image-ee7f2fb4-4388-49db-9577-5cdfff04a44c {
+        }
+    }
+</style>
+
+<div>
+    <a href="https://shop-eu-en.amd.com/processors/" role="button">
+    <div id="sd-image-ee7f2fb4-4388-49db-9577-5cdfff04a44c" data-edit-mode="">
+        <img src="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/amd-ryzen-ai.jpg?t=1728933847" alt="Ryzen™ Processors">
+    </div>
     </a>
 </div>
 
-<div class="content" role="main">
 
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
+</div><div data-widget-id="56e2b7b3-c3ba-4203-a2ae-33e85662bb17" data-placement-id="8ee22e97-41db-4c22-af54-a763c9c3e6f7" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 {
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
 
-    <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <title>Rocket Ship</title>
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
-    </svg>
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
 
-    <span>{{ title }} app is running!</span>
+    }
 
-    <svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <title>Rocket Ship Smoke</title>
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
+    .sd-simple-text-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 * {
+      margin: 0;
+      padding: 0;
 
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        min-height: 24px;
+
+    }
+
+    .sd-simple-text-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 strong,
+    #sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-56e2b7b3-c3ba-4203-a2ae-33e85662bb17 ">
+  <div id="sd-simple-text-editable-56e2b7b3-c3ba-4203-a2ae-33e85662bb17" data-edit-mode="">
+    <p><strong>Ryzen™ Processors</strong></p>
   </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-      <span>Learn Angular</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-      <span>CLI Documentation</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://material.angular.io">
-      <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px" width="21.813" height="23.453" viewBox="0 0 179.2 192.7"><path fill="#ffa726" d="M89.4 0 0 32l13.5 118.4 75.9 42.3 76-42.3L179.2 32 89.4 0z"/><path fill="#fb8c00" d="M89.4 0v192.7l76-42.3L179.2 32 89.4 0z"/><path fill="#ffe0b2" d="m102.9 146.3-63.3-30.5 36.3-22.4 63.7 30.6-36.7 22.3z"/><path fill="#fff3e0" d="M102.9 122.8 39.6 92.2l36.3-22.3 63.7 30.6-36.7 22.3z"/><path fill="#fff" d="M102.9 99.3 39.6 68.7l36.3-22.4 63.7 30.6-36.7 22.4z"/></svg>
-      <span>Angular Material</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-      <span>Angular Blog</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/devtools/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M14.73,13.31C15.52,12.24,16,10.93,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.43,0,2.74-0.48,3.81-1.27L19.59,21L21,19.59L14.73,13.31z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5 S11.99,14,9.5,14z"/><polygon points="10.29,8.44 9.5,6 8.71,8.44 6.25,8.44 8.26,10.03 7.49,12.5 9.5,10.97 11.51,12.5 10.74,10.03 12.75,8.44"/></g></g></svg>
-      <span>Angular DevTools</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>New Component</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Angular Material</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add PWA Support</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add Dependency</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Run and Watch Tests</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Build for Production</span>
-    </button>
-  </div>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build</pre>
-  </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <title>Meetup Logo</title>
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Discord" href="https://discord.gg/angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 245 240">
-        <title>Discord Logo</title>
-        <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
-        <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V40.6c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2z"/>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
-        </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
-
-  <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <title>Gray Clouds Background</title>
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-  </svg>
-
 </div>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+</div><div data-widget-id="926b4873-a8cc-42bd-9cdc-e93c9610261a" data-placement-id="dbce57ef-ba85-41a9-a384-2a93cc9a1dc4" data-placement-status="ACTIVE"><style>
+  .sd-spacer-926b4873-a8cc-42bd-9cdc-e93c9610261a {
+    height: 20px;
+  }
+</style>
 
-<router-outlet></router-outlet>
+<div class="sd-spacer-926b4873-a8cc-42bd-9cdc-e93c9610261a">
+</div>
+</div>
+  </div>
+  <div data-sub-layout="aefdbea3-a9be-4cee-b42b-4b826aacd9e8">
+    <style data-column-styling="aefdbea3-a9be-4cee-b42b-4b826aacd9e8">
+      [data-sub-layout="aefdbea3-a9be-4cee-b42b-4b826aacd9e8"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 33.33333333333333%;
+        max-width: 33.33333333333333%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="aefdbea3-a9be-4cee-b42b-4b826aacd9e8"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="aefdbea3-a9be-4cee-b42b-4b826aacd9e8"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="40827b60-cf8b-47d1-bfc3-ccaecc9ee037" data-placement-id="e0777821-abcb-48a2-ae06-a8797a38f6ab" data-placement-status="ACTIVE"><style>
+    #sd-image-40827b60-cf8b-47d1-bfc3-ccaecc9ee037 {
+        display: flex;
+        align-items: center;
+        background: url('https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2192863-amd-smart-access-memory-with-ryzen-radeon.jpg?t=1708102229') no-repeat;
+        opacity: calc(100 / 100);
+
+            cursor: pointer;
+
+            background-size: contain;
+
+            height: auto;
+
+        background-position:
+                center
+                center
+;
+
+
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+
+    #sd-image-40827b60-cf8b-47d1-bfc3-ccaecc9ee037 * {
+        margin: 0px;
+    }
+
+    #sd-image-40827b60-cf8b-47d1-bfc3-ccaecc9ee037 img {
+        width: auto;
+        opacity: 0;
+
+            height: auto;
+    }
+
+    @media only screen and (max-width: 700px) {
+        #sd-image-40827b60-cf8b-47d1-bfc3-ccaecc9ee037 {
+        }
+    }
+</style>
+
+<div>
+    <a href="https://shop-eu-en.amd.com/amd-promotions/" role="button">
+    <div id="sd-image-40827b60-cf8b-47d1-bfc3-ccaecc9ee037" data-edit-mode="">
+        <img src="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2192863-amd-smart-access-memory-with-ryzen-radeon.jpg?t=1708102229" alt="Promotions">
+    </div>
+    </a>
+</div>
+
+
+</div><div data-widget-id="c53bdd40-96e9-4ac3-bd39-d16d2147bc48" data-placement-id="58007407-f84e-4582-97f0-211d72bc55b8" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 {
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
+
+    }
+
+    .sd-simple-text-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 * {
+      margin: 0;
+      padding: 0;
+
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        min-height: 24px;
+
+    }
+
+    .sd-simple-text-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 strong,
+    #sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-c53bdd40-96e9-4ac3-bd39-d16d2147bc48 ">
+  <div id="sd-simple-text-editable-c53bdd40-96e9-4ac3-bd39-d16d2147bc48" data-edit-mode="">
+    <p><strong>Promotions</strong></p>
+  </div>
+</div>
+
+</div><div data-widget-id="8ec19a71-37f6-49ea-9e00-b326d234735c" data-placement-id="c10be822-777b-4afe-9f33-c97a92a00a42" data-placement-status="ACTIVE"><style>
+  .sd-spacer-8ec19a71-37f6-49ea-9e00-b326d234735c {
+    height: 20px;
+  }
+</style>
+
+<div class="sd-spacer-8ec19a71-37f6-49ea-9e00-b326d234735c">
+</div>
+</div>
+  </div>
+  <div data-sub-layout="856cdfe7-ceaf-4f83-aefa-ae19ff4601fc">
+    <style data-column-styling="856cdfe7-ceaf-4f83-aefa-ae19ff4601fc">
+      [data-sub-layout="856cdfe7-ceaf-4f83-aefa-ae19ff4601fc"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 16.666666666666664%;
+        max-width: 16.666666666666664%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="856cdfe7-ceaf-4f83-aefa-ae19ff4601fc"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="856cdfe7-ceaf-4f83-aefa-ae19ff4601fc"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </div>
+</div>
+<div data-sub-layout-container="ed5d708a-cadc-404e-a1ac-e64e371888f0" data-layout-name="Layout">
+  <style data-container-styling="ed5d708a-cadc-404e-a1ac-e64e371888f0">
+    [data-sub-layout-container="ed5d708a-cadc-404e-a1ac-e64e371888f0"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="ed5d708a-cadc-404e-a1ac-e64e371888f0"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="b286df2e-b5b9-495f-9c37-0333325adf83">
+    <style data-column-styling="b286df2e-b5b9-495f-9c37-0333325adf83">
+      [data-sub-layout="b286df2e-b5b9-495f-9c37-0333325adf83"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 100%;
+        max-width: 100%;
+        z-index: 0;
+        justify-content: center;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="b286df2e-b5b9-495f-9c37-0333325adf83"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="b286df2e-b5b9-495f-9c37-0333325adf83"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="def8f405-3825-4703-9acf-fd82f6023b79" data-placement-id="7c8b822a-5c1b-4fe3-bdea-994f72117142" data-placement-status="ACTIVE"><style>
+  .sd-spacer-def8f405-3825-4703-9acf-fd82f6023b79 {
+    height: 30px;
+  }
+</style>
+
+<div class="sd-spacer-def8f405-3825-4703-9acf-fd82f6023b79">
+</div>
+</div>
+  </div>
+</div>
+<div data-sub-layout-container="1043b17c-65d3-454a-8a58-f9584fb23a27" data-layout-name="Layout">
+  <style data-container-styling="1043b17c-65d3-454a-8a58-f9584fb23a27">
+    [data-sub-layout-container="1043b17c-65d3-454a-8a58-f9584fb23a27"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="1043b17c-65d3-454a-8a58-f9584fb23a27"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="9f569e4c-35b6-4969-a560-5257e0bc4be4">
+    <style data-column-styling="9f569e4c-35b6-4969-a560-5257e0bc4be4">
+      [data-sub-layout="9f569e4c-35b6-4969-a560-5257e0bc4be4"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 100%;
+        max-width: 100%;
+        z-index: 0;
+        justify-content: center;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="9f569e4c-35b6-4969-a560-5257e0bc4be4"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="9f569e4c-35b6-4969-a560-5257e0bc4be4"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3" data-placement-id="3c0db32a-8716-41b3-b7ad-3b74a3fd209a" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 {
+      padding-top: 20px;
+      padding-right: 0px;
+      padding-bottom: 20px;
+      padding-left: 0px;
+
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
+
+    }
+
+    .sd-simple-text-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 * {
+      margin: 0;
+      padding: 0;
+
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 38px;
+        min-height: 38px;
+
+    }
+
+    .sd-simple-text-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 strong,
+    #sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3 ">
+  <div id="sd-simple-text-editable-2c65d34a-19f7-40b5-9b65-2bbcd83dd8d3" data-edit-mode="">
+    <p><strong>Adaptive &amp; Embedded Computing</strong></p>
+  </div>
+</div>
+
+</div><div data-widget-id="be2696f3-a78f-4178-a1a9-92e194f1b54d" data-placement-id="e1c94578-819d-4ce7-8200-16bfaac405c7" data-placement-status="ACTIVE"><style>
+  .sd-spacer-be2696f3-a78f-4178-a1a9-92e194f1b54d {
+    height: 20px;
+  }
+</style>
+
+<div class="sd-spacer-be2696f3-a78f-4178-a1a9-92e194f1b54d">
+</div>
+</div>
+  </div>
+</div>
+<div data-sub-layout-container="1f8a937f-4d15-4229-84c0-97507c260398" data-layout-name="Layout">
+  <style data-container-styling="1f8a937f-4d15-4229-84c0-97507c260398">
+    [data-sub-layout-container="1f8a937f-4d15-4229-84c0-97507c260398"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="1f8a937f-4d15-4229-84c0-97507c260398"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="6775f42e-467f-405a-95d1-4207cd6c5f37">
+    <style data-column-styling="6775f42e-467f-405a-95d1-4207cd6c5f37">
+      [data-sub-layout="6775f42e-467f-405a-95d1-4207cd6c5f37"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 33.333333%;
+        max-width: 33.333333%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="6775f42e-467f-405a-95d1-4207cd6c5f37"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="6775f42e-467f-405a-95d1-4207cd6c5f37"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="4e88abb6-1b29-4e52-94bb-b73d928b2297" data-placement-id="8e8a6cc3-64c1-48c2-a38d-f764b47bca56" data-placement-status="ACTIVE"><style>
+    #sd-image-4e88abb6-1b29-4e52-94bb-b73d928b2297 {
+        display: flex;
+        align-items: center;
+        background: url('https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-kria-k24-tile.jpg?t=1708100738') no-repeat;
+        opacity: calc(100 / 100);
+
+            cursor: pointer;
+
+            background-size: contain;
+
+            height: auto;
+
+        background-position:
+                center
+                center
+;
+
+
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+
+    #sd-image-4e88abb6-1b29-4e52-94bb-b73d928b2297 * {
+        margin: 0px;
+    }
+
+    #sd-image-4e88abb6-1b29-4e52-94bb-b73d928b2297 img {
+        width: auto;
+        opacity: 0;
+
+            height: auto;
+    }
+
+    @media only screen and (max-width: 700px) {
+        #sd-image-4e88abb6-1b29-4e52-94bb-b73d928b2297 {
+        }
+    }
+</style>
+
+<div>
+    <a href="https://shop-eu-en.amd.com/adaptive-embedded-computing/system-on-modules/" role="button">
+    <div id="sd-image-4e88abb6-1b29-4e52-94bb-b73d928b2297" data-edit-mode="">
+        <img src="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-kria-k24-tile.jpg?t=1708100738" alt="System-on-Modules (SOMs)">
+    </div>
+    </a>
+</div>
+
+
+</div><div data-widget-id="c8708761-b795-484b-9a6d-7a6abfc09d92" data-placement-id="1a0ea3ac-55f2-4ece-9bc0-2e5095121faa" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-c8708761-b795-484b-9a6d-7a6abfc09d92 {
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
+
+    }
+
+    .sd-simple-text-c8708761-b795-484b-9a6d-7a6abfc09d92 * {
+      margin: 0;
+      padding: 0;
+
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        min-height: 24px;
+
+    }
+
+    .sd-simple-text-c8708761-b795-484b-9a6d-7a6abfc09d92 {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92 {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92 strong,
+    #sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92 strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-c8708761-b795-484b-9a6d-7a6abfc09d92 ">
+  <div id="sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92" data-edit-mode="">
+    <p><strong>System-on-Modules (SOMs)</strong></p>
+  </div>
+</div>
+
+</div><div data-widget-id="8701a61d-a53a-49d0-96a7-0b9ca6f096b5" data-placement-id="19040993-ea7d-4141-a4db-b765a5d2f4b0" data-placement-status="ACTIVE"><style>
+  .sd-spacer-8701a61d-a53a-49d0-96a7-0b9ca6f096b5 {
+    height: 20px;
+  }
+</style>
+
+<div class="sd-spacer-8701a61d-a53a-49d0-96a7-0b9ca6f096b5">
+</div>
+</div>
+  </div>
+  <div data-sub-layout="ec2cd1af-61ab-449d-ac96-0abae1daaf71">
+    <style data-column-styling="ec2cd1af-61ab-449d-ac96-0abae1daaf71">
+      [data-sub-layout="ec2cd1af-61ab-449d-ac96-0abae1daaf71"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 33.333333%;
+        max-width: 33.333333%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="ec2cd1af-61ab-449d-ac96-0abae1daaf71"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="ec2cd1af-61ab-449d-ac96-0abae1daaf71"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="5e9ba83a-c9f6-4a18-8e37-4a7917b1ebb6" data-placement-id="bccd7c3d-8811-4ac0-a36b-5cb09b2c4804" data-placement-status="ACTIVE"><style>
+    #sd-image-5e9ba83a-c9f6-4a18-8e37-4a7917b1ebb6 {
+        display: flex;
+        align-items: center;
+        background: url('https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-alveo-ul3524-tile1.jpg?t=1708100814') no-repeat;
+        opacity: calc(100 / 100);
+
+            cursor: pointer;
+
+            background-size: contain;
+
+            height: auto;
+
+        background-position:
+                center
+                center
+;
+
+
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+
+    #sd-image-5e9ba83a-c9f6-4a18-8e37-4a7917b1ebb6 * {
+        margin: 0px;
+    }
+
+    #sd-image-5e9ba83a-c9f6-4a18-8e37-4a7917b1ebb6 img {
+        width: auto;
+        opacity: 0;
+
+            height: auto;
+    }
+
+    @media only screen and (max-width: 700px) {
+        #sd-image-5e9ba83a-c9f6-4a18-8e37-4a7917b1ebb6 {
+        }
+    }
+</style>
+
+<div>
+    <a href="https://shop-eu-en.amd.com/adaptive-embedded-computing/data-center-accelerator-cards/" role="button">
+    <div id="sd-image-5e9ba83a-c9f6-4a18-8e37-4a7917b1ebb6" data-edit-mode="">
+        <img src="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-alveo-ul3524-tile1.jpg?t=1708100814" alt="Data Center Accelerator Cards">
+    </div>
+    </a>
+</div>
+
+
+</div><div data-widget-id="113a4624-72f6-4d95-8f2c-93c76b5714ae" data-placement-id="3a5217e4-6e3d-4741-a91d-a8d14146af71" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-113a4624-72f6-4d95-8f2c-93c76b5714ae {
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
+
+    }
+
+    .sd-simple-text-113a4624-72f6-4d95-8f2c-93c76b5714ae * {
+      margin: 0;
+      padding: 0;
+
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        min-height: 24px;
+
+    }
+
+    .sd-simple-text-113a4624-72f6-4d95-8f2c-93c76b5714ae {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae strong,
+    #sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-113a4624-72f6-4d95-8f2c-93c76b5714ae ">
+  <div id="sd-simple-text-editable-113a4624-72f6-4d95-8f2c-93c76b5714ae" data-edit-mode="">
+    <p><strong>Data Center Accelerator Cards</strong></p>
+  </div>
+</div>
+
+</div><div data-widget-id="e172fc0b-1e0f-4726-98c0-7587fbce44d4" data-placement-id="00eedc94-8ef4-4d03-abb6-264db10c20a8" data-placement-status="ACTIVE"><style>
+  .sd-spacer-e172fc0b-1e0f-4726-98c0-7587fbce44d4 {
+    height: 20px;
+  }
+</style>
+
+<div class="sd-spacer-e172fc0b-1e0f-4726-98c0-7587fbce44d4">
+</div>
+</div>
+  </div>
+  <div data-sub-layout="9a3ecb28-4747-4446-a022-4b53b945e709">
+    <style data-column-styling="9a3ecb28-4747-4446-a022-4b53b945e709">
+      [data-sub-layout="9a3ecb28-4747-4446-a022-4b53b945e709"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 33.333333%;
+        max-width: 33.333333%;
+        z-index: 0;
+        justify-content: flex-start;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="9a3ecb28-4747-4446-a022-4b53b945e709"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="9a3ecb28-4747-4446-a022-4b53b945e709"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="6a96520f-1830-49ff-aaea-a037cc972789" data-placement-id="54bf6e84-8bb9-4cd9-bebe-af86340980bb" data-placement-status="ACTIVE"><style>
+    #sd-image-6a96520f-1830-49ff-aaea-a037cc972789 {
+        display: flex;
+        align-items: center;
+        background: url('https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-vhk158-eval-kit-tile.jpg?t=1708100869') no-repeat;
+        opacity: calc(100 / 100);
+
+            cursor: pointer;
+
+            background-size: contain;
+
+            height: auto;
+
+        background-position:
+                center
+                center
+;
+
+
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+
+    #sd-image-6a96520f-1830-49ff-aaea-a037cc972789 * {
+        margin: 0px;
+    }
+
+    #sd-image-6a96520f-1830-49ff-aaea-a037cc972789 img {
+        width: auto;
+        opacity: 0;
+
+            height: auto;
+    }
+
+    @media only screen and (max-width: 700px) {
+        #sd-image-6a96520f-1830-49ff-aaea-a037cc972789 {
+        }
+    }
+</style>
+
+<div>
+    <a href="https://shop-eu-en.amd.com/adaptive-embedded-computing/soc-fpga-evaluation-kits/" role="button">
+    <div id="sd-image-6a96520f-1830-49ff-aaea-a037cc972789" data-edit-mode="">
+        <img src="https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-vhk158-eval-kit-tile.jpg?t=1708100869" alt="SoC &amp; FPGA Evaluation Kits">
+    </div>
+    </a>
+</div>
+
+
+</div><div data-widget-id="844f9ee3-dc03-4749-b4f9-9d19dbc28f59" data-placement-id="f1d75c36-78e0-42e4-bed9-fa52291a642e" data-placement-status="ACTIVE"><style>
+    .sd-simple-text-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 {
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
+
+    }
+
+    .sd-simple-text-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 * {
+      margin: 0;
+      padding: 0;
+
+        color: #333333;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        min-height: 24px;
+
+    }
+
+    .sd-simple-text-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 {
+        text-align: center;
+    }
+
+    #sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 {
+      min-width: 14px;
+      line-height: 1.5;
+      display: inline-block;
+    }
+
+    #sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59[data-edit-mode="true"]:hover,
+    #sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59[data-edit-mode="true"]:active,
+    #sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59[data-edit-mode="true"]:focus {
+      outline: 1px dashed #3C64F4;
+    }
+
+    #sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 strong,
+    #sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 strong * {
+      font-weight: bold;
+    }
+</style>
+
+<div class="sd-simple-text-844f9ee3-dc03-4749-b4f9-9d19dbc28f59 ">
+  <div id="sd-simple-text-editable-844f9ee3-dc03-4749-b4f9-9d19dbc28f59" data-edit-mode="">
+    <p><strong>SoC &amp; FPGA Evaluation Kits</strong></p>
+  </div>
+</div>
+
+</div><div data-widget-id="fdcd3e9f-cca5-4319-8f8e-2029fffc06b0" data-placement-id="fe5b07b1-75d5-4601-94a0-b608b62f8936" data-placement-status="ACTIVE"><style>
+  .sd-spacer-fdcd3e9f-cca5-4319-8f8e-2029fffc06b0 {
+    height: 20px;
+  }
+</style>
+
+<div class="sd-spacer-fdcd3e9f-cca5-4319-8f8e-2029fffc06b0">
+</div>
+</div>
+  </div>
+</div>
+<div data-sub-layout-container="cb80af3b-aad0-4415-a628-a506b08a8e60" data-layout-name="Layout">
+  <style data-container-styling="cb80af3b-aad0-4415-a628-a506b08a8e60">
+    [data-sub-layout-container="cb80af3b-aad0-4415-a628-a506b08a8e60"] {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 0;
+      position: relative;
+    }
+    [data-sub-layout-container="cb80af3b-aad0-4415-a628-a506b08a8e60"]:after {
+      background-position: center center;
+      background-size: cover;
+      z-index: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <div data-sub-layout="a2a1c6d2-d39b-4508-a051-8dd9eb5802d6">
+    <style data-column-styling="a2a1c6d2-d39b-4508-a051-8dd9eb5802d6">
+      [data-sub-layout="a2a1c6d2-d39b-4508-a051-8dd9eb5802d6"] {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        flex-basis: 100%;
+        max-width: 100%;
+        z-index: 0;
+        justify-content: center;
+        padding-right: 10.5px;
+        padding-left: 10.5px;
+        position: relative;
+      }
+      [data-sub-layout="a2a1c6d2-d39b-4508-a051-8dd9eb5802d6"]:after {
+        background-position: center center;
+        background-size: cover;
+        z-index: auto;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @media only screen and (max-width: 700px) {
+        [data-sub-layout="a2a1c6d2-d39b-4508-a051-8dd9eb5802d6"] {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <div data-widget-id="41a4aa80-e0fc-4bf3-bde4-8a4ae883b76b" data-placement-id="9b04661c-419b-40f2-8318-0fa732538205" data-placement-status="ACTIVE"><style>
+  .sd-spacer-41a4aa80-e0fc-4bf3-bde4-8a4ae883b76b {
+    height: 30px;
+  }
+</style>
+
+<div class="sd-spacer-41a4aa80-e0fc-4bf3-bde4-8a4ae883b76b">
+</div>
+</div>
+  </div>
+</div></div></div>
+
+    <div data-content-region="home_below_top_products"></div>
+
+    <div data-content-region="home_below_new_products"></div>
+</div>
+
+    </div>
+    <div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <button class="modal-close"
+        type="button"
+        title="Close"
+        
+>
+    <span class="aria-description--hidden">Close</span>
+    <span aria-hidden="true">&#215;</span>
+</button>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+    <div id="alert-modal" class="modal modal--alert modal--small" data-reveal data-prevent-quick-search-close>
+    <div class="swal2-icon swal2-error swal2-icon-show"><span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div>
+
+    <div class="modal-content"></div>
+
+    <div class="button-container">
+        <button type="button" class="confirm button" data-reveal-close cart_product_category="" cart-data-product-name="" cart-data-product-id="">OK</button>
+    </div>
+</div>
+</main>
+<app-footer></app-footer>
+<style>
+li.cust-cookie button#ot-sdk-btn {
+    color: #9d9fa2; font-size: 12px; transition: .3s ease-in-out; border: none; padding: 0;
+}
+#ot-sdk-btn.optanon-show-settings:hover, #ot-sdk-btn.ot-sdk-show-settings:hover {
+    color: #fff !important; text-decoration: underline ;
+}
+</style>
+        
+        <script>window.__webpack_public_path__ = "https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/dist/";</script>
+        <script src="https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/dist/theme-bundle.main.js"></script>
+        <script>
+            window.stencilBootstrap("default", "{\"customerInfo\":null,\"zoomSize\":\"1280x1280\",\"productSize\":\"500x659\",\"genericError\":\"Oops! Something went wrong.\",\"maintenanceModeSettings\":[],\"adminBarLanguage\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"admin.maintenance_header\\\":\\\"en\\\",\\\"admin.maintenance_tooltip\\\":\\\"en\\\",\\\"admin.maintenance_showstore_link\\\":\\\"en\\\",\\\"admin.prelaunch_header\\\":\\\"en\\\",\\\"admin.page_builder_link\\\":\\\"en\\\"},\\\"translations\\\":{\\\"admin.maintenance_header\\\":\\\"Your store is down for maintenance.\\\",\\\"admin.maintenance_tooltip\\\":\\\"Only administrators can view the store at the moment. Visit your control panel settings page to disable maintenance mode.\\\",\\\"admin.maintenance_showstore_link\\\":\\\"Click here to see what your visitors will see.\\\",\\\"admin.prelaunch_header\\\":\\\"Your storefront is private. Share your site with preview code:\\\",\\\"admin.page_builder_link\\\":\\\"Design this page in Page Builder\\\"}}\",\"urls\":{\"home\":\"https://shop-eu-en.amd.com/\",\"account\":{\"index\":\"/account.php\",\"orders\":{\"all\":\"/account.php?action=order_status\",\"completed\":\"/account.php?action=view_orders\",\"save_new_return\":\"/account.php?action=save_new_return\"},\"update_action\":\"/account.php?action=update_account\",\"returns\":\"/account.php?action=view_returns\",\"addresses\":\"/account.php?action=address_book\",\"inbox\":\"/account.php?action=inbox\",\"send_message\":\"/account.php?action=send_message\",\"add_address\":\"/account.php?action=add_shipping_address\",\"wishlists\":{\"all\":\"/wishlist.php\",\"add\":\"/wishlist.php?action=addwishlist\",\"edit\":\"/wishlist.php?action=editwishlist\",\"delete\":\"/wishlist.php?action=deletewishlist\"},\"details\":\"/account.php?action=account_details\",\"recent_items\":\"/account.php?action=recent_items\"},\"brands\":\"https://shop-eu-en.amd.com/brands/\",\"gift_certificate\":{\"purchase\":\"/giftcertificates.php\",\"redeem\":\"/giftcertificates.php?action=redeem\",\"balance\":\"/giftcertificates.php?action=balance\"},\"auth\":{\"login\":\"/login.php\",\"check_login\":\"/login.php?action=check_login\",\"create_account\":\"/login.php?action=create_account\",\"save_new_account\":\"/login.php?action=save_new_account\",\"forgot_password\":\"/login.php?action=reset_password\",\"send_password_email\":\"/login.php?action=send_password_email\",\"save_new_password\":\"/login.php?action=save_new_password\",\"logout\":\"/login.php?action=logout\"},\"product\":{\"post_review\":\"/postreview.php\"},\"cart\":\"/cart.php\",\"checkout\":{\"single_address\":\"/checkout\",\"multiple_address\":\"/checkout.php?action=multiple\"},\"rss\":{\"products\":[]},\"contact_us_submit\":\"/pages.php?action=sendContactForm\",\"search\":\"/search.php\",\"compare\":\"/compare\",\"sitemap\":\"/sitemap.php\",\"subscribe\":{\"action\":\"/subscribe.php\"}},\"secureBaseUrl\":\"https://shop-eu-en.amd.com\",\"cartId\":null,\"channelId\":1,\"template\":\"pages/home\",\"validationDictionaryJSON\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"validation_messages.valid_email\\\":\\\"en\\\",\\\"validation_messages.password\\\":\\\"en\\\",\\\"validation_messages.password_match\\\":\\\"en\\\",\\\"validation_messages.invalid_password\\\":\\\"en\\\",\\\"validation_messages.field_not_blank\\\":\\\"en\\\",\\\"validation_messages.certificate_amount\\\":\\\"en\\\",\\\"validation_messages.certificate_amount_range\\\":\\\"en\\\",\\\"validation_messages.price_min_evaluation\\\":\\\"en\\\",\\\"validation_messages.price_max_evaluation\\\":\\\"en\\\",\\\"validation_messages.price_min_not_entered\\\":\\\"en\\\",\\\"validation_messages.price_max_not_entered\\\":\\\"en\\\",\\\"validation_messages.price_invalid_value\\\":\\\"en\\\",\\\"validation_messages.invalid_gift_certificate\\\":\\\"en\\\"},\\\"translations\\\":{\\\"validation_messages.valid_email\\\":\\\"You must enter a valid email.\\\",\\\"validation_messages.password\\\":\\\"You must enter a password.\\\",\\\"validation_messages.password_match\\\":\\\"Your passwords do not match.\\\",\\\"validation_messages.invalid_password\\\":\\\"Passwords must be at least 7 characters and contain both alphabetic and numeric characters.\\\",\\\"validation_messages.field_not_blank\\\":\\\" field cannot be blank.\\\",\\\"validation_messages.certificate_amount\\\":\\\"You must enter a gift certificate amount.\\\",\\\"validation_messages.certificate_amount_range\\\":\\\"You must enter a certificate amount between [MIN] and [MAX]\\\",\\\"validation_messages.price_min_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_messages.price_max_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_messages.price_min_not_entered\\\":\\\"Min. price is required.\\\",\\\"validation_messages.price_max_not_entered\\\":\\\"Max. price is required.\\\",\\\"validation_messages.price_invalid_value\\\":\\\"Input must be greater than 0.\\\",\\\"validation_messages.invalid_gift_certificate\\\":\\\"Please enter your valid certificate code.\\\"}}\",\"validationFallbackDictionaryJSON\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"validation_fallback_messages.valid_email\\\":\\\"en\\\",\\\"validation_fallback_messages.password\\\":\\\"en\\\",\\\"validation_fallback_messages.password_match\\\":\\\"en\\\",\\\"validation_fallback_messages.invalid_password\\\":\\\"en\\\",\\\"validation_fallback_messages.field_not_blank\\\":\\\"en\\\",\\\"validation_fallback_messages.certificate_amount\\\":\\\"en\\\",\\\"validation_fallback_messages.certificate_amount_range\\\":\\\"en\\\",\\\"validation_fallback_messages.price_min_evaluation\\\":\\\"en\\\",\\\"validation_fallback_messages.price_max_evaluation\\\":\\\"en\\\",\\\"validation_fallback_messages.price_min_not_entered\\\":\\\"en\\\",\\\"validation_fallback_messages.price_max_not_entered\\\":\\\"en\\\",\\\"validation_fallback_messages.price_invalid_value\\\":\\\"en\\\",\\\"validation_fallback_messages.invalid_gift_certificate\\\":\\\"en\\\"},\\\"translations\\\":{\\\"validation_fallback_messages.valid_email\\\":\\\"You must enter a valid email.\\\",\\\"validation_fallback_messages.password\\\":\\\"You must enter a password.\\\",\\\"validation_fallback_messages.password_match\\\":\\\"Your passwords do not match.\\\",\\\"validation_fallback_messages.invalid_password\\\":\\\"Passwords must be at least 7 characters and contain both alphabetic and numeric characters.\\\",\\\"validation_fallback_messages.field_not_blank\\\":\\\" field cannot be blank.\\\",\\\"validation_fallback_messages.certificate_amount\\\":\\\"You must enter a gift certificate amount.\\\",\\\"validation_fallback_messages.certificate_amount_range\\\":\\\"You must enter a certificate amount between [MIN] and [MAX]\\\",\\\"validation_fallback_messages.price_min_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_fallback_messages.price_max_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_fallback_messages.price_min_not_entered\\\":\\\"Min. price is required.\\\",\\\"validation_fallback_messages.price_max_not_entered\\\":\\\"Max. price is required.\\\",\\\"validation_fallback_messages.price_invalid_value\\\":\\\"Input must be greater than 0.\\\",\\\"validation_fallback_messages.invalid_gift_certificate\\\":\\\"Please enter your valid certificate code.\\\"}}\",\"validationDefaultDictionaryJSON\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"validation_default_messages.valid_email\\\":\\\"en\\\",\\\"validation_default_messages.password\\\":\\\"en\\\",\\\"validation_default_messages.password_match\\\":\\\"en\\\",\\\"validation_default_messages.invalid_password\\\":\\\"en\\\",\\\"validation_default_messages.field_not_blank\\\":\\\"en\\\",\\\"validation_default_messages.certificate_amount\\\":\\\"en\\\",\\\"validation_default_messages.certificate_amount_range\\\":\\\"en\\\",\\\"validation_default_messages.price_min_evaluation\\\":\\\"en\\\",\\\"validation_default_messages.price_max_evaluation\\\":\\\"en\\\",\\\"validation_default_messages.price_min_not_entered\\\":\\\"en\\\",\\\"validation_default_messages.price_max_not_entered\\\":\\\"en\\\",\\\"validation_default_messages.price_invalid_value\\\":\\\"en\\\",\\\"validation_default_messages.invalid_gift_certificate\\\":\\\"en\\\"},\\\"translations\\\":{\\\"validation_default_messages.valid_email\\\":\\\"You must enter a valid email.\\\",\\\"validation_default_messages.password\\\":\\\"You must enter a password.\\\",\\\"validation_default_messages.password_match\\\":\\\"Your passwords do not match.\\\",\\\"validation_default_messages.invalid_password\\\":\\\"Passwords must be at least 7 characters and contain both alphabetic and numeric characters.\\\",\\\"validation_default_messages.field_not_blank\\\":\\\"The field cannot be blank.\\\",\\\"validation_default_messages.certificate_amount\\\":\\\"You must enter a gift certificate amount.\\\",\\\"validation_default_messages.certificate_amount_range\\\":\\\"You must enter a certificate amount between [MIN] and [MAX]\\\",\\\"validation_default_messages.price_min_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_default_messages.price_max_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_default_messages.price_min_not_entered\\\":\\\"Min. price is required.\\\",\\\"validation_default_messages.price_max_not_entered\\\":\\\"Max. price is required.\\\",\\\"validation_default_messages.price_invalid_value\\\":\\\"Input must be greater than 0.\\\",\\\"validation_default_messages.invalid_gift_certificate\\\":\\\"Please enter your valid certificate code.\\\"}}\",\"carouselArrowAndDotAriaLabel\":\"Go to slide [SLIDE_NUMBER] of [SLIDES_QUANTITY]\",\"carouselActiveDotAriaLabel\":\"active\",\"carouselContentAnnounceMessage\":\"You are currently on slide [SLIDE_NUMBER] of [SLIDES_QUANTITY]\"}").load();
+        </script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>        
+        <script type="text/javascript" src="https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/js/theme/custom/custom.js"></script>
+        <script type="text/javascript" src="https://cdn11.bigcommerce.com/s-3wzspkde5p/stencil/5c324aa0-77a3-013d-0710-3aea611807fa/e/4f263d60-c527-013c-d3c5-5e78115259f0/js/theme/custom/google_analytics_events.js"></script>
+        
+        <script type="text/javascript" src="https://cdn11.bigcommerce.com/shared/js/csrf-protection-header-5eeddd5de78d98d146ef4fd71b2aedce4161903e.js"></script>
+<script type="text/javascript" src="https://cdn11.bigcommerce.com/r-067ea492ba1f3d755be9084bb043581923498df7/javascript/visitor_stencil.js"></script>
+<script>
+wwPage = window.location.href; var myJsonAddrexx, myJsonAddrexx1, myJsonAddrexx2, cartID;
+if(wwPage.indexOf("checkout") >= 0){
+fetch('/api/storefront/cart', {
+  credentials: 'include'
+}).then(function(response) {
+  return response.json();
+}).then(function(myJson) {
+  myJsonAddrexx = myJson;
+  cartID = myJsonAddrexx[0].id;
+});
+};
+function fetch1(){
+fetch('/api/storefront/cart?includes=consignments.availableShippingOptions', {
+    credentials: 'include'
+}).then(function (response) {
+    return response.json();
+}).then(function (cartJson) {
+	myJsonAddrexx1 = cartJson;
+    return cartJson[0].id;
+}).catch(function (error) {
+}).then(function (cartId) {
+    fetch('/api/storefront/checkouts/' + cartId, {
+        credentials: 'include'
+    }).then(function (response) {
+        return response.json();
+    }).then(function (checkoutJson) {
+		myJsonAddrexx2 = checkoutJson;
+    }).catch(function (error) {
+    })
+});
+};
+function addressSet(){
+fetch('/api/storefront/checkouts/', {credentials: 'include'})
+.then(res => res.json())
+.then(data => localStorage.setItem("shippingAddress2", (JSON.stringify(data.consignments[0].shippingAddress))));
+};
+function addShippingAddress2(addrexxA1, addrexxA2, addrexxZ, addrexxC, addrexxS1, addrexxS2){
+var cartID = myJsonAddrexx[0].id; var consignmentsID = myJsonAddrexx2.consignments[0].id; var shippingAddressData = myJsonAddrexx2.consignments[0].shippingAddress; shippingAddressData.address1 = addrexxA1; shippingAddressData.address2 = addrexxA2; shippingAddressData.city = addrexxC; shippingAddressData.postalCode = addrexxZ; shippingAddressData.stateOrProvince = addrexxS1; shippingAddressData.stateOrProvinceCode = addrexxS2;
+jQuery2.each(myJsonAddrexx[0].lineItems.physicalItems, function() {
+var xhr = new XMLHttpRequest(); xhr.withCredentials = true; var cartQuantity = this.quantity; var itemIDX = this.id;
+var data = JSON.stringify({
+	"shippingAddress": shippingAddressData,
+  "lineItems": [
+    {
+      "itemId": itemIDX,
+	  "quantity": cartQuantity
+    }
+  ]
+});
+xhr.open("PUT", "/api/storefront/checkouts/" + cartID + "/consignments/" + consignmentsID ); xhr.setRequestHeader("content-type", "application/json"); xhr.send(data);		   
+});
+};
+restrictState = ['AK','VI','GU','AS','PR','MH','MP','FM','PW','HI'];
+restrictState2 = ['AK','VI','GU','AS','PR','MH','MP','FM','PW','HI'];
+restrictState3 = ['ALASKA','VIRGIN ISLANDS','GUAM','AMERICAN SOMOA','PUERTO RICO','MARSHALL ISLANDS','NORTHERN MARIANA ISLANDS','FEDERATED STATES OF MICRONESIA','PALAU','HAWAII'];
+var limitCountries = true,
+setDefaultCountry = false,
+numberOfChars = 35,
+autocompleteName = false,
+cityStateLimited = false, 
+detectForeignCharacters = true,
+cssTweak = true,
+showAutocompleteFooter = !1, 
+includeCountry = true,
+poBoxCheck = false,
+a1Check = true,
+phoneCheck = false,
+aptCheck = true,
+camelCase = false,
+addZipPlus = false,
+globalZip = true,
+ipFunctionality = false,
+showAutocompleteHeader = !1, 
+geoInitialComplete = !1,
+customFields = false,
+strictA1 = true,
+strictZip = true,
+validateAddressLine2 = true,
+countryWillBeSet = 'Netherlands',
+countriesShipping = '|Select a country|Choose a Country|Belgium|Bulgaria|Croatia|Cyprus|Czech Republic|Denmark|Estonia|Finland|Greece|Hungary|Ireland|Italy|Latvia|Luxembourg|Malta|Netherlands|Poland|Portugal|Romania|Slovakia|Slovenia|Spain|Sweden|Switzerland|United Kingdom',
+countriesBilling = countriesShipping,
+zipDoubleCheck = false,
+restrictStateEnabled = false,
+phoneCheckAdded = false,
+postEntryValZip = false,
+postEntryA2 = false,
+postEntryCheck = true;
+function loadaddrexx() {var _cc_url = "xxredda.s3.amazonaws.com/bcinstall/xxerdda2022.js";var _cc_s = document.createElement('script');_cc_s.type = 'text/javascript';_cc_s.src = (("http:" === document.location.protocol) ? "http:" : "https:") + "//" + _cc_url;document.getElementsByTagName("head")[0].appendChild(_cc_s);}
+if ((wwPage.indexOf("billing_address") >= 0 || wwPage.indexOf("create_account") >= 0 || wwPage.indexOf("shipping_address") >= 0 || wwPage.indexOf("checkout") >= 0) && wwPage.indexOf("confirmation") == -1 ){
+if(wwPage.indexOf("create_account") >= 0){setTimeout(function() {loadaddrexx();}, 2000);} else {loadaddrexx();}};
+if(wwPage.indexOf("checkout") >= 0){fetch1();}
+</script>
+
+            <script type="text/javascript">
+                window.dataLayer = window.dataLayer || [];
+                if (window.location.href.indexOf("login.php") > -1) {
+                    var term = "You've been logged out of your account successfully.";
+                    var gettext = $('.login-page .login').find('.alertBox--success #alertBox-message-text').text();
+                    if( gettext.indexOf( term ) != -1 ) {
+                       var cartData = {
+                            'event': 'CustomerState',
+                            'CustomerState': 'User logout',
+                        }
+                        window.dataLayer.push( cartData );
+                    } else {
+                        var CustomerData = {
+                            'event': 'CustomerState',
+                            'CustomerState': 'Guest',
+                        }
+                        window.dataLayer.push( CustomerData );
+                    }
+                } else {
+                    var CustomerData = {
+                        'event': 'CustomerState',
+                        'CustomerState': 'Guest',
+                    }
+                    window.dataLayer.push( CustomerData );
+                }
+            </script>
+
+        <script type="text/plain" class="optanon-category-C0003">
+            var jsContext = JSON.parse("{\"customerInfo\":null,\"zoomSize\":\"1280x1280\",\"productSize\":\"500x659\",\"genericError\":\"Oops! Something went wrong.\",\"maintenanceModeSettings\":[],\"adminBarLanguage\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"admin.maintenance_header\\\":\\\"en\\\",\\\"admin.maintenance_tooltip\\\":\\\"en\\\",\\\"admin.maintenance_showstore_link\\\":\\\"en\\\",\\\"admin.prelaunch_header\\\":\\\"en\\\",\\\"admin.page_builder_link\\\":\\\"en\\\"},\\\"translations\\\":{\\\"admin.maintenance_header\\\":\\\"Your store is down for maintenance.\\\",\\\"admin.maintenance_tooltip\\\":\\\"Only administrators can view the store at the moment. Visit your control panel settings page to disable maintenance mode.\\\",\\\"admin.maintenance_showstore_link\\\":\\\"Click here to see what your visitors will see.\\\",\\\"admin.prelaunch_header\\\":\\\"Your storefront is private. Share your site with preview code:\\\",\\\"admin.page_builder_link\\\":\\\"Design this page in Page Builder\\\"}}\",\"urls\":{\"home\":\"https://shop-eu-en.amd.com/\",\"account\":{\"index\":\"/account.php\",\"orders\":{\"all\":\"/account.php?action=order_status\",\"completed\":\"/account.php?action=view_orders\",\"save_new_return\":\"/account.php?action=save_new_return\"},\"update_action\":\"/account.php?action=update_account\",\"returns\":\"/account.php?action=view_returns\",\"addresses\":\"/account.php?action=address_book\",\"inbox\":\"/account.php?action=inbox\",\"send_message\":\"/account.php?action=send_message\",\"add_address\":\"/account.php?action=add_shipping_address\",\"wishlists\":{\"all\":\"/wishlist.php\",\"add\":\"/wishlist.php?action=addwishlist\",\"edit\":\"/wishlist.php?action=editwishlist\",\"delete\":\"/wishlist.php?action=deletewishlist\"},\"details\":\"/account.php?action=account_details\",\"recent_items\":\"/account.php?action=recent_items\"},\"brands\":\"https://shop-eu-en.amd.com/brands/\",\"gift_certificate\":{\"purchase\":\"/giftcertificates.php\",\"redeem\":\"/giftcertificates.php?action=redeem\",\"balance\":\"/giftcertificates.php?action=balance\"},\"auth\":{\"login\":\"/login.php\",\"check_login\":\"/login.php?action=check_login\",\"create_account\":\"/login.php?action=create_account\",\"save_new_account\":\"/login.php?action=save_new_account\",\"forgot_password\":\"/login.php?action=reset_password\",\"send_password_email\":\"/login.php?action=send_password_email\",\"save_new_password\":\"/login.php?action=save_new_password\",\"logout\":\"/login.php?action=logout\"},\"product\":{\"post_review\":\"/postreview.php\"},\"cart\":\"/cart.php\",\"checkout\":{\"single_address\":\"/checkout\",\"multiple_address\":\"/checkout.php?action=multiple\"},\"rss\":{\"products\":[]},\"contact_us_submit\":\"/pages.php?action=sendContactForm\",\"search\":\"/search.php\",\"compare\":\"/compare\",\"sitemap\":\"/sitemap.php\",\"subscribe\":{\"action\":\"/subscribe.php\"}},\"secureBaseUrl\":\"https://shop-eu-en.amd.com\",\"cartId\":null,\"channelId\":1,\"template\":\"pages/home\",\"validationDictionaryJSON\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"validation_messages.valid_email\\\":\\\"en\\\",\\\"validation_messages.password\\\":\\\"en\\\",\\\"validation_messages.password_match\\\":\\\"en\\\",\\\"validation_messages.invalid_password\\\":\\\"en\\\",\\\"validation_messages.field_not_blank\\\":\\\"en\\\",\\\"validation_messages.certificate_amount\\\":\\\"en\\\",\\\"validation_messages.certificate_amount_range\\\":\\\"en\\\",\\\"validation_messages.price_min_evaluation\\\":\\\"en\\\",\\\"validation_messages.price_max_evaluation\\\":\\\"en\\\",\\\"validation_messages.price_min_not_entered\\\":\\\"en\\\",\\\"validation_messages.price_max_not_entered\\\":\\\"en\\\",\\\"validation_messages.price_invalid_value\\\":\\\"en\\\",\\\"validation_messages.invalid_gift_certificate\\\":\\\"en\\\"},\\\"translations\\\":{\\\"validation_messages.valid_email\\\":\\\"You must enter a valid email.\\\",\\\"validation_messages.password\\\":\\\"You must enter a password.\\\",\\\"validation_messages.password_match\\\":\\\"Your passwords do not match.\\\",\\\"validation_messages.invalid_password\\\":\\\"Passwords must be at least 7 characters and contain both alphabetic and numeric characters.\\\",\\\"validation_messages.field_not_blank\\\":\\\" field cannot be blank.\\\",\\\"validation_messages.certificate_amount\\\":\\\"You must enter a gift certificate amount.\\\",\\\"validation_messages.certificate_amount_range\\\":\\\"You must enter a certificate amount between [MIN] and [MAX]\\\",\\\"validation_messages.price_min_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_messages.price_max_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_messages.price_min_not_entered\\\":\\\"Min. price is required.\\\",\\\"validation_messages.price_max_not_entered\\\":\\\"Max. price is required.\\\",\\\"validation_messages.price_invalid_value\\\":\\\"Input must be greater than 0.\\\",\\\"validation_messages.invalid_gift_certificate\\\":\\\"Please enter your valid certificate code.\\\"}}\",\"validationFallbackDictionaryJSON\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"validation_fallback_messages.valid_email\\\":\\\"en\\\",\\\"validation_fallback_messages.password\\\":\\\"en\\\",\\\"validation_fallback_messages.password_match\\\":\\\"en\\\",\\\"validation_fallback_messages.invalid_password\\\":\\\"en\\\",\\\"validation_fallback_messages.field_not_blank\\\":\\\"en\\\",\\\"validation_fallback_messages.certificate_amount\\\":\\\"en\\\",\\\"validation_fallback_messages.certificate_amount_range\\\":\\\"en\\\",\\\"validation_fallback_messages.price_min_evaluation\\\":\\\"en\\\",\\\"validation_fallback_messages.price_max_evaluation\\\":\\\"en\\\",\\\"validation_fallback_messages.price_min_not_entered\\\":\\\"en\\\",\\\"validation_fallback_messages.price_max_not_entered\\\":\\\"en\\\",\\\"validation_fallback_messages.price_invalid_value\\\":\\\"en\\\",\\\"validation_fallback_messages.invalid_gift_certificate\\\":\\\"en\\\"},\\\"translations\\\":{\\\"validation_fallback_messages.valid_email\\\":\\\"You must enter a valid email.\\\",\\\"validation_fallback_messages.password\\\":\\\"You must enter a password.\\\",\\\"validation_fallback_messages.password_match\\\":\\\"Your passwords do not match.\\\",\\\"validation_fallback_messages.invalid_password\\\":\\\"Passwords must be at least 7 characters and contain both alphabetic and numeric characters.\\\",\\\"validation_fallback_messages.field_not_blank\\\":\\\" field cannot be blank.\\\",\\\"validation_fallback_messages.certificate_amount\\\":\\\"You must enter a gift certificate amount.\\\",\\\"validation_fallback_messages.certificate_amount_range\\\":\\\"You must enter a certificate amount between [MIN] and [MAX]\\\",\\\"validation_fallback_messages.price_min_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_fallback_messages.price_max_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_fallback_messages.price_min_not_entered\\\":\\\"Min. price is required.\\\",\\\"validation_fallback_messages.price_max_not_entered\\\":\\\"Max. price is required.\\\",\\\"validation_fallback_messages.price_invalid_value\\\":\\\"Input must be greater than 0.\\\",\\\"validation_fallback_messages.invalid_gift_certificate\\\":\\\"Please enter your valid certificate code.\\\"}}\",\"validationDefaultDictionaryJSON\":\"{\\\"locale\\\":\\\"en\\\",\\\"locales\\\":{\\\"validation_default_messages.valid_email\\\":\\\"en\\\",\\\"validation_default_messages.password\\\":\\\"en\\\",\\\"validation_default_messages.password_match\\\":\\\"en\\\",\\\"validation_default_messages.invalid_password\\\":\\\"en\\\",\\\"validation_default_messages.field_not_blank\\\":\\\"en\\\",\\\"validation_default_messages.certificate_amount\\\":\\\"en\\\",\\\"validation_default_messages.certificate_amount_range\\\":\\\"en\\\",\\\"validation_default_messages.price_min_evaluation\\\":\\\"en\\\",\\\"validation_default_messages.price_max_evaluation\\\":\\\"en\\\",\\\"validation_default_messages.price_min_not_entered\\\":\\\"en\\\",\\\"validation_default_messages.price_max_not_entered\\\":\\\"en\\\",\\\"validation_default_messages.price_invalid_value\\\":\\\"en\\\",\\\"validation_default_messages.invalid_gift_certificate\\\":\\\"en\\\"},\\\"translations\\\":{\\\"validation_default_messages.valid_email\\\":\\\"You must enter a valid email.\\\",\\\"validation_default_messages.password\\\":\\\"You must enter a password.\\\",\\\"validation_default_messages.password_match\\\":\\\"Your passwords do not match.\\\",\\\"validation_default_messages.invalid_password\\\":\\\"Passwords must be at least 7 characters and contain both alphabetic and numeric characters.\\\",\\\"validation_default_messages.field_not_blank\\\":\\\"The field cannot be blank.\\\",\\\"validation_default_messages.certificate_amount\\\":\\\"You must enter a gift certificate amount.\\\",\\\"validation_default_messages.certificate_amount_range\\\":\\\"You must enter a certificate amount between [MIN] and [MAX]\\\",\\\"validation_default_messages.price_min_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_default_messages.price_max_evaluation\\\":\\\"Min. price must be less than max. price.\\\",\\\"validation_default_messages.price_min_not_entered\\\":\\\"Min. price is required.\\\",\\\"validation_default_messages.price_max_not_entered\\\":\\\"Max. price is required.\\\",\\\"validation_default_messages.price_invalid_value\\\":\\\"Input must be greater than 0.\\\",\\\"validation_default_messages.invalid_gift_certificate\\\":\\\"Please enter your valid certificate code.\\\"}}\",\"carouselArrowAndDotAriaLabel\":\"Go to slide [SLIDE_NUMBER] of [SLIDES_QUANTITY]\",\"carouselActiveDotAriaLabel\":\"active\",\"carouselContentAnnounceMessage\":\"You are currently on slide [SLIDE_NUMBER] of [SLIDES_QUANTITY]\"}");
+            let cookieurl = jsContext.urls.home;
+            var finalurl = cookieurl +'cart.php';
+            document.cookie = `bc-url=${finalurl}; domain=amd.com; path=/; SameSite=None; Secure`
+            setTimeout (function() {
+                var count = $('header .HeaderMain .navUser .navUser-item--cart .countPill.cart-quantity.countPill--positive').text();
+                var itemcount = parseInt(count);
+                if(count != 0) {
+                    document.cookie = `bc-products-in-cart=${itemcount}; domain=amd.com; path=/; SameSite=None; Secure`
+                } else {
+                    document.cookie = `bc-products-in-cart=0; domain=amd.com; path=/; SameSite=None; Secure`
+                }
+            }, 2000);
+            theme.updatecookie = function() {
+                setTimeout (function() {
+                    var count = $('header .HeaderMain .navUser .navUser-item--cart .countPill.cart-quantity.countPill--positive').text();
+                    var itemcount = parseInt(count);
+                    if(count != 0) {
+                        document.cookie = `bc-products-in-cart=${itemcount}; domain=amd.com; path=/; SameSite=None; Secure`
+                    } else {
+                        document.cookie = `bc-products-in-cart=0; domain=amd.com; path=/; SameSite=None; Secure`
+                    }
+                }, 5000);
+            } 
+        </script>
+
+    </body>
+</html>
