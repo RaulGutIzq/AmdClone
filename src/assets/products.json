@@ -7,7 +7,6 @@
     "price": 0,
     "image": "https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-kria-k24-tile.jpg?t=1708100738",
     "imageUrl": "https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-kria-k24-tile.jpg?t=1708100738",
-    "link": "localhost:4200/adaptive-embedded-computing/system-on-modules/",
     "category": "Adaptive Embedded Computing"
   },
   {
@@ -18,7 +17,6 @@
     "price": 0,
     "image": "https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-alveo-ul3524-tile1.jpg?t=1708100814",
     "imageUrl": "https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-alveo-ul3524-tile1.jpg?t=1708100814",
-    "link": "localhost:4200/adaptive-embedded-computing/data-center-accelerator-cards/",
     "category": "Adaptive Embedded Computing"
   },
   {
@@ -29,7 +27,6 @@
     "price": 0,
     "image": "https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-vhk158-eval-kit-tile.jpg?t=1708100869",
     "imageUrl": "https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-vhk158-eval-kit-tile.jpg?t=1708100869",
-    "link": "localhost:4200/adaptive-embedded-computing/soc-fpga-evaluation-kits/",
     "category": "Adaptive Embedded Computing"
   }
 ]

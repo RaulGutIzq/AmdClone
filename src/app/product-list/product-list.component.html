@@ -1,10 +1,23 @@
-<div class="product-list">
-    <div *ngFor="let product of products" class="product-card">
-      <a [routerLink]="['/product', product.id]">
-        <img [src]="product.imageUrl" [alt]="product.name">
-        <h3>{{ product.name }}</h3>
-        <p class="category">{{ product.category }}</p>
-        <p class="price">{{ product.price | currency:'EUR' }}</p>
-      </a>
+<div data-sub-layout-container="1f8a937f-4d15-4229-84c0-97507c260398" data-layout-name="Layout">
+  <div  data-sub-layout="6775f42e-467f-405a-95d1-4207cd6c5f37" *ngFor="let product of products">
+    <div  data-widget-id="4e88abb6-1b29-4e52-94bb-b73d928b2297" data-placement-id="8e8a6cc3-64c1-48c2-a38d-f764b47bca56" data-placement-status="ACTIVE">
+      <div>
+        <a  [routerLink]="['/product', product.id]" role="button">
+          <div  id="sd-image-4e88abb6-1b29-4e52-94bb-b73d928b2297" data-edit-mode="">
+            <img [src]="product.image" [alt]="product.title">
+          </div>
+        </a>
+      </div>
+    </div>
+    <div data-widget-id="c8708761-b795-484b-9a6d-7a6abfc09d92" data-placement-id="1a0ea3ac-55f2-4ece-9bc0-2e5095121faa" data-placement-status="ACTIVE">
+      <div  class="sd-simple-text-c8708761-b795-484b-9a6d-7a6abfc09d92">
+        <div  id="sd-simple-text-editable-c8708761-b795-484b-9a6d-7a6abfc09d92" data-edit-mode="">
+          <p ><strong >{{ product.title }}</strong></p>
+        </div>
+      </div>
+    </div>
+    <div  data-widget-id="8701a61d-a53a-49d0-96a7-0b9ca6f096b5" data-placement-id="19040993-ea7d-4141-a4db-b765a5d2f4b0" data-placement-status="ACTIVE">
+      <div  class="sd-spacer-8701a61d-a53a-49d0-96a7-0b9ca6f096b5"></div>
     </div>
   </div>
+</div>
