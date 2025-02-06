@@ -1,26 +1,17 @@
 [
   {
-    "id": 1,
-    "name": "AMD Kria™ K26 System-on-Module",
-    "description": "Cost-optimized vision AI starter kit for smart camera developers",
-    "price": 2999.99,
-    "imageUrl": "https://www.amd.com/content/dam/amd/en/images/technology/adaptive-soc/kria/k26-som-product-image-1260x709.png",
-    "category": "System-on-Modules"
+    title: 'System-on-Modules (SOMs)',
+    image: 'https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-kria-k24-tile.jpg?t=1708100738',
+    link: 'localhost:4200/adaptive-embedded-computing/system-on-modules/'
   },
   {
-    "id": 2,
-    "name": "AMD Alveo™ U55C Data Center Accelerator Card",
-    "description": "High-performance accelerator for compute-intensive workloads",
-    "price": 8999.99,
-    "imageUrl": "https://www.amd.com/content/dam/amd/en/images/technology/adaptive-soc/alveo/u55c-product-image-1260x709.png",
-    "category": "Data Center Accelerators"
+    title: 'Data Center Accelerator Cards',
+    image: 'https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-amd-alveo-ul3524-tile1.jpg?t=1708100814',
+    link: 'localhost:4200/adaptive-embedded-computing/data-center-accelerator-cards/'
   },
   {
-    "id": 3,
-    "name": "Versal™ AI Core Series Evaluation Kit",
-    "description": "AI inference and signal processing evaluation platform",
-    "price": 14999.99,
-    "imageUrl": "https://www.amd.com/content/dam/amd/en/images/technology/adaptive-soc/versal/versal-ai-core-eval-kit-1260x709.png",
-    "category": "SoC & FPGA Evaluation Kits"
+    title: 'SoC & FPGA Evaluation Kits',
+    image: 'https://cdn11.bigcommerce.com/s-3wzspkde5p/images/stencil/original/image-manager/2362834-vhk158-eval-kit-tile.jpg?t=1708100869',
+    link: 'localhost:4200/adaptive-embedded-computing/soc-fpga-evaluation-kits/'
   }
 ]
